@@ -1,14 +1,127 @@
+/* Base styles and CSS reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --primary-color: #61dafb;
+    --secondary-color: #282c34;
+    --accent-color: #ffd700;
+    --card-bg-color: #2a2a2a;
+}
+
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
-    margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 40px 0;
 }
 
 h1 {
-    color: #333;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
 }
 
-p {
-    color: #666;
+/* Card container styles */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card styles */
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Creates a square aspect ratio */
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-front {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+}
+
+.card-back {
+    background-color: var(--secondary-color);
+    transform: rotateY(180deg);
+}
+
+/* Card content styles */
+.card-front h2 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.card-front p {
+    font-size: 1rem;
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+#bouncing-flag {
+    position: fixed;
+    font-size: 50px;
+    user-select: none;
+}
+
+.learn-more {
+    padding: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
